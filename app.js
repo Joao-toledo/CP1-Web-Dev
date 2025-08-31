@@ -51,7 +51,19 @@ const JogadorasIniciais = [
   }
 ]
 
+function getJogadoras() {
+  return JSON.parse(localStorage.getItem("jogadoras")) || [];
+}
+
+function setJogadoras(jogadoras) {
+  localStorage.setItem("jogadoras", JSON.stringify(jogadoras));
+  renderJogadoras();
+}
+
 function initStorage() {
   if (!localStorage.getItem("jogadoras")) {
-    setJogadoras(JogadorasIniciais);
-  }    }
+    setJogadoras(initialData);
+  }
+}
+
+initStorage();
