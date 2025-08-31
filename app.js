@@ -69,20 +69,40 @@ function initStorage() {
 function renderJogadoras() {
   const cards = document.getElementById("cards");
   const jogadoras = getJogadoras();
+  const search = document.getElementById("search").value.toLowerCase();
+  const filter = document.getElementById("filter").value;
+
+  const clubes = [...new Set(jogadoras.map(j => j.clube))];
+  const filtroSelect = document.getElementById("filter");
+  filtroSelect.innerHTML = '<option value="">Filtrar por clube</option>';
+  clubes.forEach(c => {
+    const opt = document.createElement("option");
+    opt.value = c;
+    opt.textContent = c;
+    filtroSelect.appendChild(opt);
+  });
+  filtroSelect.value = filter;
 
   cards.innerHTML = "";
-  jogadoras.forEach((j, index) => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-      <img src="${j.foto}" alt="${j.nome}">
-      <h3>${j.nome}</h3>
-      <p><b>Posição:</b> ${j.posicao}</p>
-      <p><b>Clube:</b> ${j.clube}</p>
-      <p><b>Gols:</b> ${j.gols} | <b>Assistências:</b> ${j.assistencias} | <b>Jogos:</b> ${j.jogos}</p>
-    `;
-    cards.appendChild(card);
-  });
+  jogadoras
+    .filter(j => (j.nome.toLowerCase().includes(search) || j.posicao.toLowerCase().includes(search)) &&
+                 (filter === "" || j.clube === filter))
+    .forEach((j, index) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <img src="${j.foto}" alt="${j.nome}">
+        <h3>${j.nome}</h3>
+        <p><b>Posição:</b> ${j.posicao}</p>
+        <p><b>Clube:</b> ${j.clube}</p>
+        <p><b>Gols:</b> ${j.gols} | <b>Assistências:</b> ${j.assistencias} | <b>Jogos:</b> ${j.jogos}</p>
+      `;
+      cards.appendChild(card);
+    });
+
+document.getElementById("search").addEventListener("input", renderJogadoras);
+document.getElementById("filter").addEventListener("change", renderJogadoras);
 }
+
 
 initStorage();
