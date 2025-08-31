@@ -66,4 +66,23 @@ function initStorage() {
   }
 }
 
+function renderJogadoras() {
+  const cards = document.getElementById("cards");
+  const jogadoras = getJogadoras();
+
+  cards.innerHTML = "";
+  jogadoras.forEach((j, index) => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <img src="${j.foto}" alt="${j.nome}">
+      <h3>${j.nome}</h3>
+      <p><b>Posição:</b> ${j.posicao}</p>
+      <p><b>Clube:</b> ${j.clube}</p>
+      <p><b>Gols:</b> ${j.gols} | <b>Assistências:</b> ${j.assistencias} | <b>Jogos:</b> ${j.jogos}</p>
+    `;
+    cards.appendChild(card);
+  });
+}
+
 initStorage();
