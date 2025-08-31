@@ -84,21 +84,28 @@ function renderJogadoras() {
   filtroSelect.value = filter;
 
   cards.innerHTML = "";
-  jogadoras
-    .filter(j => (j.nome.toLowerCase().includes(search) || j.posicao.toLowerCase().includes(search)) &&
-                 (filter === "" || j.clube === filter))
-    .forEach((j, index) => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `
-        <img src="${j.foto}" alt="${j.nome}">
-        <h3>${j.nome}</h3>
-        <p><b>Posição:</b> ${j.posicao}</p>
-        <p><b>Clube:</b> ${j.clube}</p>
-        <p><b>Gols:</b> ${j.gols} | <b>Assistências:</b> ${j.assistencias} | <b>Jogos:</b> ${j.jogos}</p>
-      `;
-      cards.appendChild(card);
-    });
+jogadoras
+  .filter(j => (j.nome.toLowerCase().includes(search) || j.posicao.toLowerCase().includes(search)) &&
+               (filter === "" || j.clube === filter))
+  .forEach((j, index) => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <span class="favorita ${j.favorita ? 'ativa' : ''}" onclick="favoritarJogadora(${index})">★</span>
+      <img src="${j.foto}" alt="${j.nome}">
+      <h3>${j.nome}</h3>
+      <p><b>Posição:</b> ${j.posicao}</p>
+      <p><b>Clube:</b> ${j.clube}</p>
+      <p><b>Gols:</b> ${j.gols} | <b>Assistências:</b> ${j.assistencias} | <b>Jogos:</b> ${j.jogos}</p>
+    `;
+    cards.appendChild(card);
+  });
+
+  function favoritarJogadora(index) {
+  const jogadoras = getJogadoras();
+  jogadoras[index].favorita = !jogadoras[index].favorita;
+  setJogadoras(jogadoras);
+}
 
 document.getElementById("search").addEventListener("input", renderJogadoras);
 document.getElementById("filter").addEventListener("change", renderJogadoras);
