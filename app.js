@@ -50,3 +50,8 @@ const JogadorasIniciais = [
     "favorita": false
   }
 ]
+
+function initStorage() {
+  if (!localStorage.getItem("jogadoras")) {
+    setJogadoras(JogadorasIniciais);
+  }    }
