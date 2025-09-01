@@ -118,6 +118,11 @@ if (!nome || !posicao || !clube || !foto) {
   return;
 }
 
+if (gols < 0 || assistencias < 0 || jogos < 0) {
+  alert("Números não podem ser negativos!");
+  return;
+}
+
 const jogadoras = getJogadoras();
 const novaJogadora = { nome, posicao, clube, gols, assistencias, jogos, foto, favorita: false };
 
