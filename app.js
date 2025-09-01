@@ -62,7 +62,7 @@ function setJogadoras(jogadoras) {
 
 function initStorage() {
   if (!localStorage.getItem("jogadoras")) {
-    setJogadoras(initialData);
+    setJogadoras(JogadorasIniciais);
   }
 }
 
@@ -126,6 +126,18 @@ if (gols < 0 || assistencias < 0 || jogos < 0) {
 const jogadoras = getJogadoras();
 const novaJogadora = { nome, posicao, clube, gols, assistencias, jogos, foto, favorita: false };
 
+if (editIndex) {
+  jogadoras[editIndex] = novaJogadora;
+  alert("Jogadora editada com sucesso!");
+} else {
+  jogadoras.push(novaJogadora);
+  alert("Jogadora adicionada com sucesso!");
+}
+
+setJogadoras(jogadoras);
+resetForm();
+}
+
 function editarJogadora(index) {
   const j = getJogadoras()[index];
   document.getElementById("form-title").innerText = "Editar Jogadora";
@@ -151,6 +163,12 @@ function removerJogadora(index) {
   setJogadoras(jogadoras);
 }
 
+function resetForm() {
+  document.getElementById("form-title").innerText = "Adicionar Jogadora";
+  document.getElementById("editIndex").value = "";
+  document.querySelectorAll(".form-container input").forEach(i => i.value = "");
+}
+
 function ordenar(campo) {
   const jogadoras = getJogadoras();
   if (['gols', 'assistencias', 'jogos'].includes(campo)) {
@@ -163,8 +181,6 @@ function ordenar(campo) {
 
 document.getElementById("search").addEventListener("input", renderJogadoras);
 document.getElementById("filter").addEventListener("change", renderJogadoras);
-}
-
 
 initStorage();
 renderJogadoras();
