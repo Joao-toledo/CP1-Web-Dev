@@ -113,6 +113,11 @@ function salvarJogadora() {
   const foto = document.getElementById("foto").value.trim();
   const editIndex = document.getElementById("editIndex").value;
 
+if (!nome || !posicao || !clube || !foto) {
+  alert("Preencha todos os campos obrigatórios!");
+  return;
+}
+
 const jogadoras = getJogadoras();
 const novaJogadora = { nome, posicao, clube, gols, assistencias, jogos, foto, favorita: false };
 
