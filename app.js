@@ -110,9 +110,22 @@ function salvarJogadora() {
   const jogos = Number(document.getElementById("jogos").value);
   const foto = document.getElementById("foto").value.trim();
   const editIndex = document.getElementById("editIndex").value;
-  
+
 const jogadoras = getJogadoras();
 const novaJogadora = { nome, posicao, clube, gols, assistencias, jogos, foto, favorita: false };
+
+function editarJogadora(index) {
+  const j = getJogadoras()[index];
+  document.getElementById("form-title").innerText = "Editar Jogadora";
+  document.getElementById("editIndex").value = index;
+  document.getElementById("nome").value = j.nome;
+  document.getElementById("posicao").value = j.posicao;
+  document.getElementById("clube").value = j.clube;
+  document.getElementById("gols").value = j.gols;
+  document.getElementById("assistencias").value = j.assistencias;
+  document.getElementById("jogos").value = j.jogos;
+  document.getElementById("foto").value = j.foto;
+}
 
   function favoritarJogadora(index) {
   const jogadoras = getJogadoras();
@@ -126,3 +139,4 @@ document.getElementById("filter").addEventListener("change", renderJogadoras);
 
 
 initStorage();
+renderJogadoras();
