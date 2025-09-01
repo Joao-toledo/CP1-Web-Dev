@@ -110,6 +110,9 @@ function salvarJogadora() {
   const jogos = Number(document.getElementById("jogos").value);
   const foto = document.getElementById("foto").value.trim();
   const editIndex = document.getElementById("editIndex").value;
+  
+const jogadoras = getJogadoras();
+const novaJogadora = { nome, posicao, clube, gols, assistencias, jogos, foto, favorita: false };
 
   function favoritarJogadora(index) {
   const jogadoras = getJogadoras();
