@@ -97,6 +97,8 @@ jogadoras
       <p><b>Posição:</b> ${j.posicao}</p>
       <p><b>Clube:</b> ${j.clube}</p>
       <p><b>Gols:</b> ${j.gols} | <b>Assistências:</b> ${j.assistencias} | <b>Jogos:</b> ${j.jogos}</p>
+      <button class="edit-btn" onclick="editarJogadora(${index})">Editar</button>
+      <button class="delete-btn" onclick="removerJogadora(${index})">Excluir</button>
     `;
     cards.appendChild(card);
   });
@@ -125,6 +127,12 @@ function editarJogadora(index) {
   document.getElementById("assistencias").value = j.assistencias;
   document.getElementById("jogos").value = j.jogos;
   document.getElementById("foto").value = j.foto;
+}
+function removerJogadora(index) {
+  const jogadoras = getJogadoras();
+  jogadoras.splice(index, 1);
+  setJogadoras(jogadoras);
+  alert("Jogadora removida com sucesso!");
 }
 
   function favoritarJogadora(index) {
