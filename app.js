@@ -151,6 +151,16 @@ function removerJogadora(index) {
   setJogadoras(jogadoras);
 }
 
+function ordenar(campo) {
+  const jogadoras = getJogadoras();
+  if (['gols', 'assistencias', 'jogos'].includes(campo)) {
+    jogadoras.sort((a, b) => b[campo] - a[campo]);
+  } else {
+    jogadoras.sort((a, b) => a[campo].localeCompare(b[campo]));
+  }
+  setJogadoras(jogadoras);
+}
+
 document.getElementById("search").addEventListener("input", renderJogadoras);
 document.getElementById("filter").addEventListener("change", renderJogadoras);
 }
