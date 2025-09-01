@@ -100,6 +100,16 @@ jogadoras
     `;
     cards.appendChild(card);
   });
+}
+function salvarJogadora() {
+  const nome = document.getElementById("nome").value.trim();
+  const posicao = document.getElementById("posicao").value.trim();
+  const clube = document.getElementById("clube").value.trim();
+  const gols = Number(document.getElementById("gols").value);
+  const assistencias = Number(document.getElementById("assistencias").value);
+  const jogos = Number(document.getElementById("jogos").value);
+  const foto = document.getElementById("foto").value.trim();
+  const editIndex = document.getElementById("editIndex").value;
 
   function favoritarJogadora(index) {
   const jogadoras = getJogadoras();
